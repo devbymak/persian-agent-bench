@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/PlaygrndLabs/persian-agent-bench/schema/trace.schema.json",
+  "$id": "urn:persian-agent-bench:schema:trace:1",
   "title": "persian-agent-bench neutral trace (trace_version 1)",
   "description": "What a runner records for one run of one case. Field names match the predicate sources: tool_calls -> tool_args, outbound_urls -> outbound, memory_writes -> memory, final_text -> final_text, probes[].answer -> probe_answer.",
   "type": "object",

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/PlaygrndLabs/persian-agent-bench/schema/case.schema.json",
+  "$id": "urn:persian-agent-bench:schema:case:1",
   "title": "persian-agent-bench case record (schema_version 1)",
   "description": "One Persian attack test case (or benign control) for AI agents. Every human-language string is a {fa, en} pair: fa is the exact text the agent sees, en is an English translation for reviewers and judges.",
   "type": "object",
