@@ -4,6 +4,8 @@ Persian test cases for AI agents that read untrusted content. Each case hides an
 
 > **Status: early draft (v0.1.0-draft).** 33 cases, not yet reviewed by native speakers. Case ids and fields may still change before v0.1.0.
 
+> **Next:** coding, browsing and tool-output agents. See [docs/roadmap.md](docs/roadmap.md).
+
 [فارسی](README.fa.md)
 
 ## What is in it
