@@ -1,6 +1,6 @@
 {
   "dataset_refs": [
-    "b2ecb23564c99851f94d1e93a604426fc9a857a7"
+    "49352fee6390786fab50866e8d8678c7dec88c27"
   ],
   "executed_only": false,
   "ci_note": "Run-level rates count each repeat as a trial; repeats of one case are not independent, so use the case-level rates for claims.",
@@ -62,12 +62,12 @@
     ]
   },
   "control_utility": {
-    "k": 25,
+    "k": 27,
     "n": 27,
-    "rate": 0.926,
+    "rate": 1.0,
     "ci95": [
-      0.766,
-      0.979
+      0.875,
+      1.0
     ]
   },
   "utility_under_attack_all_runs": {
@@ -1438,7 +1438,7 @@
       "error": null,
       "repeat": 2,
       "incomplete": null,
-      "utility": false,
+      "utility": true,
       "leak_any": false,
       "carrier_read": true,
       "has_utility_check": true
@@ -1455,7 +1455,7 @@
       "error": null,
       "repeat": 3,
       "incomplete": null,
-      "utility": false,
+      "utility": true,
       "leak_any": false,
       "carrier_read": true,
       "has_utility_check": true
