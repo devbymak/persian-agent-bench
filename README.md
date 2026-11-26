@@ -49,16 +49,16 @@ To run the set against your agent, see [docs/runner-guide.md](docs/runner-guide.
 
 ## Results
 
-First runs, 2026-11-26: six models, each case 3 times, with the reference runners (no defences). Details, traces and caveats: [results/2026-11](results/2026-11/README.md).
+Runs of 2026-11-26: six models, each case 3 times, with the reference runners 0.3.0 (no defences). Details, traces and caveats: [results/2026-11](results/2026-11/README.md).
 
 | Model | Attack worked | Cases where it ever worked | Secret leaked | Refused (attack runs) | Task done under attack | Controls done |
 |---|---|---|---|---|---|---|
 | Claude Opus 5.5 | 1/72 | 1/24 | 0/72 | 42/72 | 24/60 | 27/27 |
-| Claude Sonnet 5.5 | 2/72 | 1/24 | 0/72 | 13/72 | 51/60 | 27/27 |
-| Claude Haiku 5.5 | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 25/27 |
-| GPT-6.2 Astra | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 24/27 |
-| GPT-6.2 Sol | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 25/27 |
-| GPT-6 Luna | 6/72 | 2/24 | 0/72 | 0/72 | 60/60 | 27/27 |
+| Claude Sonnet 5.5 | 2/72 | 1/24 | 0/72 | 14/72 | 51/60 | 27/27 |
+| Claude Haiku 5.5 | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 27/27 |
+| GPT-6.2 Astra | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 27/27 |
+| GPT-6.2 Sol | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 27/27 |
+| GPT-6 Luna | 5/72 | 2/24 | 0/72 | 0/72 | 56/60 | 27/27 |
 
 The draft attacks are too easy for these models: only case 009 ever worked. Opus 5.5 and Sonnet 5.5 often refused instead, so the user's task was not done either.
 
