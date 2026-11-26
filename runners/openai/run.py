@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Reference runner for OpenAI models: same simulated world, tools, prompt and
-trace format as runners/claude/run.py, with the OpenAI Chat Completions API.
+trace format as runners/claude/run.py, with the OpenAI Responses API.
 
   pip install openai
   export OPENAI_API_KEY=...
@@ -29,58 +29,61 @@ RUNNER_NAME = "pab-openai-runner"
 
 
 def tool_defs() -> list[dict]:
-    return [{"type": "function", "function": {"name": t["name"], "description": t["description"],
-                                              "parameters": t["input_schema"]}} for t in C.tool_defs()]
+    return [{"type": "function", "name": t["name"], "description": t["description"],
+             "parameters": t["input_schema"]} for t in C.tool_defs()]
+
+
+def _dump(item) -> dict:
+    return item.model_dump(exclude_none=True, by_alias=True) if hasattr(item, "model_dump") else dict(vars(item))
 
 
 def run_model(client, model: str, effort: str | None, case: dict, info: dict, world, runner: dict) -> str:
-    messages = [{"role": "system", "content": C.system_prompt(info)},
-                {"role": "user", "content": case["user_request"]["fa"]}]
+    # Responses API: reasoning models accept function tools only here, not in Chat Completions.
+    # store=False keeps runs out of OpenAI's stored responses; reasoning is carried forward encrypted.
+    items = [{"role": "user", "content": case["user_request"]["fa"]}]
     texts, stops, usage = [], [], {"input_tokens": 0, "output_tokens": 0}
-    params = {"model": model, "tools": tool_defs(), "max_completion_tokens": 16000}
+    params = {"model": model, "instructions": C.system_prompt(info), "tools": tool_defs(),
+              "max_output_tokens": 16000, "store": False, "include": ["reasoning.encrypted_content"]}
     if effort:
-        params["reasoning_effort"] = effort
+        params["reasoning"] = {"effort": effort}
     for _ in range(C.MAX_TURNS):
-        resp = client.chat.completions.create(messages=messages, **params)
+        resp = client.responses.create(input=items, **params)
         if resp.usage:
-            usage["input_tokens"] += resp.usage.prompt_tokens or 0
-            usage["output_tokens"] += resp.usage.completion_tokens or 0
+            usage["input_tokens"] += resp.usage.input_tokens or 0
+            usage["output_tokens"] += resp.usage.output_tokens or 0
         runner["served_model"] = resp.model
-        choice = resp.choices[0]
-        msg = choice.message
-        stops.append(choice.finish_reason)
-        if msg.refusal:
+        stops.append(resp.status)
+        out = list(resp.output or [])
+        refused = [c for o in out if o.type == "message" for c in o.content if c.type == "refusal"]
+        if refused:
             runner["incomplete"] = "refusal"
             break  # the refused message is not shown as an answer
-        if choice.finish_reason == "content_filter":
-            runner["incomplete"] = "refusal:content_filter"
+        if resp.status == "incomplete":
+            reason = getattr(resp.incomplete_details, "reason", None)
+            runner["incomplete"] = "refusal:content_filter" if reason == "content_filter" else "max_tokens"
+            texts += [c.text.strip() for o in out if o.type == "message" for c in o.content
+                      if c.type == "output_text" and c.text.strip()]
             break
-        if msg.content and msg.content.strip():
-            texts.append(msg.content.strip())
-        if choice.finish_reason == "length":
-            runner["incomplete"] = "max_tokens"
-            break
-        calls = msg.tool_calls or []
+        texts += [c.text.strip() for o in out if o.type == "message" for c in o.content
+                  if c.type == "output_text" and c.text.strip()]
+        calls = [o for o in out if o.type == "function_call"]
         if not calls:
             break
-        messages.append({"role": "assistant", "content": msg.content,
-                         "tool_calls": [{"id": tc.id, "type": "function",
-                                         "function": {"name": tc.function.name, "arguments": tc.function.arguments}}
-                                        for tc in calls]})
+        items += [_dump(o) for o in out]
         for tc in calls:
             try:
-                args = json.loads(tc.function.arguments or "{}")
+                args = json.loads(tc.arguments or "{}")
                 if not isinstance(args, dict):
                     raise ValueError("arguments are not an object")
             except ValueError as e:
                 world.calls.append({"seq": len(world.calls) + 1, "phase": "attack",
-                                    "tool": tc.function.name if tc.function.name in C.DESCRIPTIONS else None,
-                                    "native_tool": tc.function.name, "args": {"_raw": tc.function.arguments or ""},
+                                    "tool": tc.name if tc.name in C.DESCRIPTIONS else None,
+                                    "native_tool": tc.name, "args": {"_raw": tc.arguments or ""},
                                     "status": "failed", "origin": "agent"})
-                out = f"Error: invalid JSON arguments ({e})."
+                result = f"Error: invalid JSON arguments ({e})."
             else:
-                out, _err = world.call(tc.function.name, args)
-            messages.append({"role": "tool", "tool_call_id": tc.id, "content": out})
+                result, _err = world.call(tc.name, args)
+            items.append({"type": "function_call_output", "call_id": tc.call_id, "output": result})
     else:
         stops.append("max_turns")
         runner["incomplete"] = "max_turns"
