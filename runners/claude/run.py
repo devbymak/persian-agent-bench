@@ -316,8 +316,10 @@ def run_scripted(mode: str, case: dict, world: World) -> str:
     return ""
 
 
-def trace_for(case, info, ref, model, effort, client, repeat=1) -> dict:
-    runner = {"repeat": repeat, "name": RUNNER_NAME, "version": RUNNER_VERSION, "model": model, "mode": "foreground",
+def trace_for(case, info, ref, model, effort, client, repeat=1, run_fn=None, runner_name=RUNNER_NAME) -> dict:
+    """One run of one case. Other runners pass their own `run_fn` (same signature as run_model)."""
+    run_fn = run_fn or run_model
+    runner = {"repeat": repeat, "name": runner_name, "version": RUNNER_VERSION, "model": model, "mode": "foreground",
               "request_lang": "fa", "memory_kind": "none", "effort": effort or "model default", "tools_exposed": "all 15"}
     tr = {"trace_version": 1, "case_id": case["id"], "dataset_ref": ref, "runner": runner,
           "tool_calls": [], "outbound_urls": [], "memory_writes": [], "final_text": "", "error": None}
@@ -328,7 +330,7 @@ def trace_for(case, info, ref, model, effort, client, repeat=1) -> dict:
             if model in ("reference", "user"):
                 text = run_scripted(model, case, world)
             else:
-                text = run_model(client, model, effort, case, info, world, runner)
+                text = run_fn(client, model, effort, case, info, world, runner)
             tr["error"] = None
             break
         except Exception as e:  # noqa: BLE001 - retry the whole case, then record and move on
