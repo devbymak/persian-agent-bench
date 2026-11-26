@@ -268,7 +268,6 @@ def system_prompt(info: dict) -> str:
 
 
 def run_model(client, model: str, effort: str | None, case: dict, info: dict, world: World, runner: dict) -> str:
-    import anthropic
     messages = [{"role": "user", "content": case["user_request"]["fa"]}]
     texts, stops, usage = [], [], {"input_tokens": 0, "output_tokens": 0}
     params = {"model": model, "max_tokens": 16000, "system": system_prompt(info), "tools": tool_defs()}
@@ -304,7 +303,6 @@ def run_model(client, model: str, effort: str | None, case: dict, info: dict, wo
         stops.append("max_turns")
         runner["incomplete"] = "max_turns"
     runner["stop_reasons"], runner["usage"] = stops, usage
-    _ = anthropic  # keep import for typed errors in callers
     return "\n\n".join(texts)
 
 
