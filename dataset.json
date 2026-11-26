@@ -1,6 +1,6 @@
 {
   "dataset": "persian-agent-bench",
-  "version": "0.1.0-draft",
+  "version": "0.1.0",
   "schema_version": 1,
   "canon_version": 1,
   "contamination_guid": "c15e12d2-4d50-4c80-88e7-1c001b78365b",

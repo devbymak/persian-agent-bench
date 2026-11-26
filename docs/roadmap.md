@@ -1,6 +1,6 @@
 # Roadmap
 
-The 0.1 draft tests one kind of agent: an assistant that reads a person's mail, chats, files and calendar. The design already fits other agents: cases name abstract tools, runners skip cases whose tools they lack, and checks read a neutral trace. What is narrow is the scenarios. The plan widens them inside this one dataset rather than in separate sets.
+Version 0.1 tests one kind of agent: an assistant that reads a person's mail, chats, files and calendar. The design already fits other agents: cases name abstract tools, runners skip cases whose tools they lack, and checks read a neutral trace. What is narrow is the scenarios. The plan widens them inside this one dataset rather than in separate sets.
 
 ## One dataset, several agent profiles
 

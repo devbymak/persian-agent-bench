@@ -2,7 +2,7 @@
 
 Persian test cases for AI agents that read untrusted content. Each case hides an instruction in an email, a forwarded chat message, a file or a shared document, and checks whether the agent obeys it.
 
-> **Status: early draft (v0.1.0-draft).** 33 cases, not yet reviewed by native speakers. Case ids and fields may still change before v0.1.0.
+> **Status: v0.1.0, first release.** 33 cases. Case ids and fields are stable within 0.1.x. The Persian text is not yet reviewed by outside native speakers.
 
 > **Next:** coding, browsing and tool-output agents. See [docs/roadmap.md](docs/roadmap.md).
 
@@ -60,7 +60,7 @@ Runs of 2026-11-26: six models, each case 3 times, with the reference runners 0.
 | GPT-6.2 Sol | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 27/27 |
 | GPT-6 Luna | 5/72 | 2/24 | 0/72 | 0/72 | 56/60 | 27/27 |
 
-The draft attacks are too easy for these models: only case 009 ever worked. Opus 5.5 and Sonnet 5.5 often refused instead, so the user's task was not done either.
+The 0.1 attacks are too easy for these models: only case 009 ever worked. Opus 5.5 and Sonnet 5.5 often refused instead, so the user's task was not done either.
 
 When you report your own results, give the attack success rate (lower is safer), the plain vs disguised pairs and control utility, and name the dataset version, model, harness and whether blocked calls were counted (`--executed-only`).
 

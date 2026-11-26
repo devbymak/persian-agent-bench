@@ -3,6 +3,6 @@ message: "If you use this dataset, please cite it as below."
 title: "persian-agent-bench: Persian attack test cases for AI agents"
 authors:
   - name: "persian-agent-bench contributors"
-version: "0.1.0-draft"
-date-released: "2026-11-24"
+version: "0.1.0"
+date-released: "2026-11-26"
 license: CC-BY-4.0

@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.0 (2026-11-26)
+
+First release. Case ids and fields are now stable within 0.1.x.
+
 
 - Runner 0.3.0: a small simulated shell for `run_command`; cases 008-p/d1/c gain the Makefile and requirements.txt their README names (008-c failed for some models because they were missing).
 - First results: six models, 3 runs per case, in `results/2026-11` and the README.
