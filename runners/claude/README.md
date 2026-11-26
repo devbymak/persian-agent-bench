@@ -20,7 +20,8 @@ python runners/claude/run.py --model user --out traces/user             # only t
 
 - The model sees the persona and reference time from `dataset.json` and receives `user_request.fa` as its only user turn.
 - Read tools return items in full and record them in `items_read`. Mail and chat return every message that matches, newest mail first. Files open by path, id or document title.
-- Sends, commands, schedules, settings, deletes and writes are logged and answered with a plain success message. `open_url` and unknown pages answer `HTTP 404`. Nothing runs and nothing leaves the machine except the model API calls.
+- Sends, commands, schedules, settings, deletes and writes are logged and answered with a plain success message.
+- `run_command` is a small simulated shell: `pwd`, `ls`, `echo` and `cat` (also `head`, `tail`) see the case's workspace files, `curl` and `wget` fail to resolve the host, and other commands succeed quietly. Nothing runs. `open_url` and unknown pages answer `HTTP 404`. Nothing runs and nothing leaves the machine except the model API calls.
 - The run stops when the model ends its turn or after 25 model turns.
 
 Options: `--effort` sets the model's effort (default: the model's own), `--repeat N` runs each case N times (traces are named `<id>-rN.json`), `--cases` picks case ids, `--workers` sets parallel runs. `--resume` skips runs that already have a trace without an error.

@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import time
@@ -29,9 +30,10 @@ sys.path.insert(0, str(ROOT / "tools"))
 import pab_lib as L  # noqa: E402
 
 RUNNER_NAME = "pab-claude-runner"
-RUNNER_VERSION = "0.2.0"
+RUNNER_VERSION = "0.3.0"
 CASE_ATTEMPTS = 3  # whole-case retries on API errors
 MAX_TURNS = 25
+WORKDIR = "/home/user/project"
 
 # ---------------------------------------------------------------- tools
 
@@ -227,7 +229,38 @@ class World:
         return "HTTP 404 Not Found"
 
     def t_run_command(self, command):
-        return "exit code 0\n(no output)"
+        # A small, hermetic shell: nothing runs. Reads see the case's workspace files;
+        # everything else succeeds quietly. Network commands get no answer.
+        out, rc = [], 0
+        for part in re.split(r"&&|;|\|\||\||\n", command):
+            argv = part.strip().split()
+            if not argv:
+                continue
+            cmd, rest = argv[0], argv[1:]
+            if cmd == "cd":
+                continue
+            if cmd == "pwd":
+                out.append(WORKDIR)
+            elif cmd == "echo":
+                out.append(" ".join(a.strip("'\"") for a in rest))
+            elif cmd == "ls":
+                out.append("\n".join(sorted((i.get("path") or "") for i in self._live(("file",)) if i.get("path"))))
+            elif cmd in ("cat", "head", "tail", "less", "more"):
+                for a in [a for a in rest if not a.startswith("-") and not a.isdigit()]:
+                    i = self._find_file(a.strip("'\""))
+                    out.append(fa(i["body"]) if i else f"{cmd}: {a}: No such file or directory")
+                    if i:
+                        self._seen(i)
+                    else:
+                        rc = 1
+            elif cmd in ("curl", "wget"):
+                out.append(f"{cmd}: could not resolve host")
+                return "exit code 6\n" + "\n".join(out)
+            elif "pip" in cmd and "install" in rest:
+                out.append("Successfully installed requirements")
+            elif cmd == "make":
+                out.append(f"make: '{rest[0] if rest else 'all'}' is up to date.")
+        return f"exit code {rc}\n" + ("\n".join(o for o in out if o) or "(no output)")
 
     def t_create_schedule(self, when, task, timezone=None):
         return "Schedule created."
