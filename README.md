@@ -4,6 +4,8 @@ Persian test cases for AI agents that read untrusted content. Each case hides an
 
 > **Status: v0.1.0, first release.** 33 cases. Case ids and fields are stable within 0.1.x. The Persian text is not yet reviewed by outside native speakers.
 
+> **Also on Hugging Face** (gated, no training): [devbymak/persian-agent-bench](https://huggingface.co/datasets/devbymak/persian-agent-bench).
+
 > **Next:** coding, browsing and tool-output agents. See [docs/roadmap.md](docs/roadmap.md).
 
 [فارسی](README.fa.md)

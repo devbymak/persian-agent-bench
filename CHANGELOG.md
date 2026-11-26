@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Gated Hugging Face copy of the 0.1.0 cases, linked from the README.
+
 ## 0.1.0 (2026-11-26)
 
 First release. Case ids and fields are now stable within 0.1.x.
