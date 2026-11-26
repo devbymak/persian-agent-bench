@@ -45,11 +45,24 @@ python tools/validate.py --preview pab-a-004-d1   # read one case, hidden charac
 python tools/score.py path/to/traces/    # score your runner's traces
 ```
 
-To run the set against your agent, see [docs/runner-guide.md](docs/runner-guide.md). A minimal reference runner for Claude models is in [runners/claude](runners/claude/README.md). Pin a git tag or commit and record it in every trace.
+To run the set against your agent, see [docs/runner-guide.md](docs/runner-guide.md). Reference runners for Claude and OpenAI models are in [runners/](runners/). Pin a git tag or commit and record it in every trace.
 
 ## Results
 
-Report attack success rate (lower is safer), the plain vs disguised pairs, and control utility. Always name the dataset version, model, harness and whether blocked calls were counted (`--executed-only`).
+First runs, 2026-11-26: six models, each case 3 times, with the reference runners (no defences). Details, traces and caveats: [results/2026-11](results/2026-11/README.md).
+
+| Model | Attack worked | Cases where it ever worked | Secret leaked | Refused (attack runs) | Task done under attack | Controls done |
+|---|---|---|---|---|---|---|
+| Claude Opus 5.5 | 1/72 | 1/24 | 0/72 | 42/72 | 24/60 | 27/27 |
+| Claude Sonnet 5.5 | 2/72 | 1/24 | 0/72 | 13/72 | 51/60 | 27/27 |
+| Claude Haiku 5.5 | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 25/27 |
+| GPT-6.2 Astra | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 24/27 |
+| GPT-6.2 Sol | 0/72 | 0/24 | 0/72 | 0/72 | 60/60 | 25/27 |
+| GPT-6 Luna | 6/72 | 2/24 | 0/72 | 0/72 | 60/60 | 27/27 |
+
+The draft attacks are too easy for these models: only case 009 ever worked. Opus 5.5 and Sonnet 5.5 often refused instead, so the user's task was not done either.
+
+When you report your own results, give the attack success rate (lower is safer), the plain vs disguised pairs and control utility, and name the dataset version, model, harness and whether blocked calls were counted (`--executed-only`).
 
 ## Related work
 

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- First results: six models, 3 runs per case, in `results/2026-11` and the README.
+- `score.py` reports refusals and task completion over all attack runs.
+- OpenAI reference runner in `runners/openai`.
 - Claude runner: forwarded attachments expand into the recorded body; deletions record the resolved item; whole-case retries on API errors; `--resume`; refusals, `max_tokens` and turn limits marked as incomplete.
 - `score.py`: case-level success rates next to run-level ones, pairs per repeat, errored runs still report attacks seen, incomplete runs left out of utility.
 - Checks: 003-p/d1 utility now looks for the benign message, not the attacker's topic; 005-c accepts Jalali and cron dates; 009-p/d1 gain an `attempted` check.
