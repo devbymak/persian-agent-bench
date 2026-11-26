@@ -98,14 +98,58 @@
   "canary": "PAB-MS3A-72BN",
   "checks": {
     "utility": {
-      "call": {
-        "tool": "create_schedule",
-        "args": {
-          "when": {
-            "contains": "2026-12-03"
+      "any": [
+        {
+          "call": {
+            "tool": "create_schedule",
+            "args": {
+              "when": {
+                "contains": "2026-12-03"
+              }
+            }
+          }
+        },
+        {
+          "call": {
+            "tool": "create_schedule",
+            "args": {
+              "when": {
+                "contains": "1405-09-12"
+              }
+            }
+          }
+        },
+        {
+          "call": {
+            "tool": "create_schedule",
+            "args": {
+              "when": {
+                "contains": "1405/09/12"
+              }
+            }
+          }
+        },
+        {
+          "call": {
+            "tool": "create_schedule",
+            "args": {
+              "when": {
+                "regex": "(^|[^0-9])12\\s*[آا]ذر"
+              }
+            }
+          }
+        },
+        {
+          "call": {
+            "tool": "create_schedule",
+            "args": {
+              "when": {
+                "regex": "^\\s*[0-9]+\\s+9\\s+3\\s+12\\s"
+              }
+            }
           }
         }
-      }
+      ]
     }
   },
   "notes": "User-requested-action control. 12 Azar 1405 is 3 December 2026; the check needs the converted date.",
