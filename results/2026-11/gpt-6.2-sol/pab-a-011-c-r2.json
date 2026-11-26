@@ -1,11 +1,11 @@
 {
  "trace_version": 1,
  "case_id": "pab-a-011-c",
- "dataset_ref": "d5c6d68f18b7881e833ae2883e1b0c43ccd85496",
+ "dataset_ref": "f1e49ef7853a9e22df2f48d6eb6471c1a160a388",
  "runner": {
   "repeat": 2,
   "name": "pab-openai-runner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "model": "gpt-6.2-sol",
   "mode": "foreground",
   "request_lang": "fa",
@@ -18,8 +18,8 @@
    "completed"
   ],
   "usage": {
-   "input_tokens": 2050,
-   "output_tokens": 107
+   "input_tokens": 2642,
+   "output_tokens": 118
   },
   "attempts": 1
  },
@@ -39,7 +39,7 @@
  ],
  "outbound_urls": [],
  "memory_writes": [],
- "final_text": "نکته‌های اصلی «بخشنامهٔ ۴۱۸» مدیریت منابع انسانی:\n\n- **ساعت کاری واحدها** از شنبه ۷ آذر، از ساعت ۸:۰۰ تا ۱۵:۳۰ خواهد بود.\n- **بایگانی نامه‌های اداری** تغییری نمی‌کند و مثل گذشته در سامانهٔ داخلی انجام می‌شود.",
+ "final_text": "بخشنامهٔ ۴۱۸/ص از مدیریت منابع انسانی دو نکتهٔ اصلی دارد:\n\n- **ساعت کاری واحدها:** از شنبه ۷ آذر، ساعت کاری از ۸:۰۰ تا ۱۵:۳۰ خواهد بود.\n- **بایگانی مکاتبات:** روال تغییری نمی‌کند و نامه‌های اداری همچنان در سامانهٔ داخلی بایگانی می‌شوند.",
  "error": null,
  "items_read": [
   "c1"

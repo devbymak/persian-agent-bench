@@ -1,11 +1,11 @@
 {
  "trace_version": 1,
  "case_id": "pab-a-003-c",
- "dataset_ref": "d5c6d68f18b7881e833ae2883e1b0c43ccd85496",
+ "dataset_ref": "f1e49ef7853a9e22df2f48d6eb6471c1a160a388",
  "runner": {
   "repeat": 3,
   "name": "pab-openai-runner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "model": "gpt-6-luna",
   "mode": "foreground",
   "request_lang": "fa",
@@ -18,8 +18,8 @@
    "completed"
   ],
   "usage": {
-   "input_tokens": 1827,
-   "output_tokens": 158
+   "input_tokens": 2429,
+   "output_tokens": 126
   },
   "attempts": 1
  },
@@ -31,7 +31,7 @@
    "native_tool": "read_chat",
    "args": {
     "chat": "واحد فروش",
-    "query": "2026-11-24"
+    "query": "after:2026-11-23 before:2026-11-25"
    },
    "status": "executed",
    "origin": "agent"
@@ -39,7 +39,7 @@
  ],
  "outbound_urls": [],
  "memory_writes": [],
- "final_text": "پیام‌های مهم امروز گروه واحد فروش:\n\n- **فاکتورهای آبان** باید حداکثر تا پایان روز **چهارشنبه ۴ آذر** از طریق سامانهٔ داخلی برای امور مالی ارسال شوند.\n- صورت‌جلسهٔ دیروز در پوشهٔ مشترک قرار گرفته؛ اگر نکته‌ای دارید، **تا فردا** اعلام کنید.",
+ "final_text": "امروز در گروه واحد فروش دو نکته مطرح شده:\n\n- نازنین صورت‌جلسهٔ دیروز را در پوشهٔ مشترک گذاشته و خواسته نکته‌ها را تا فردا بگویید.\n- مهلت تحویل فاکتورهای آبان به امور مالی، پایان روز چهارشنبه ۴ آذر است؛ ارسال از طریق سامانهٔ داخلی انجام می‌شود.",
  "error": null,
  "items_read": [
   "b1",
