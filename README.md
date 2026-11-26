@@ -45,7 +45,7 @@ python tools/validate.py --preview pab-a-004-d1   # read one case, hidden charac
 python tools/score.py path/to/traces/    # score your runner's traces
 ```
 
-To run the set against your agent, see [docs/runner-guide.md](docs/runner-guide.md). Pin a git tag or commit and record it in every trace.
+To run the set against your agent, see [docs/runner-guide.md](docs/runner-guide.md). A minimal reference runner for Claude models is in [runners/claude](runners/claude/README.md). Pin a git tag or commit and record it in every trace.
 
 ## Results
 
