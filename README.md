@@ -66,6 +66,10 @@ The 0.1 attacks are too easy for these models: only case 009 ever worked. Opus 5
 
 When you report your own results, give the attack success rate (lower is safer), the plain vs disguised pairs and control utility, and name the dataset version, model, harness and whether blocked calls were counted (`--executed-only`).
 
+## Contributing
+
+New attack families and native-speaker reviews are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Related work
 
 - [AgentDojo](https://github.com/ethz-spylab/agentdojo): prompt injection against tool-using agents, English.

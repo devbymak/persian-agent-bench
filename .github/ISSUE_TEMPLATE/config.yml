@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a harmful case privately
+    url: https://github.com/devbymak/persian-agent-bench/security/advisories/new
+    about: A real person or brand, or a payload that could cause harm.

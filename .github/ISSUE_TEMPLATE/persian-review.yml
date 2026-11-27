@@ -1,0 +1,18 @@
+name: Persian review
+description: Report a problem with the Persian (or its English translation) in a case.
+labels: ["review"]
+body:
+  - type: input
+    id: case
+    attributes:
+      label: Case id
+      placeholder: pab-a-004-d1
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong
+      description: Quote the text and say what a native speaker would write instead. The checklist is in docs/review.md.
+    validations:
+      required: true

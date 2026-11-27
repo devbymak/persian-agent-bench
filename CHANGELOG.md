@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- CONTRIBUTING.md, a native-speaker review checklist (docs/review.md), issue forms for new case ideas and Persian review, and a pull request template.
 - Gated Hugging Face copy of the 0.1.0 cases, linked from the README.
 
 ## 0.1.0 (2026-11-26)
